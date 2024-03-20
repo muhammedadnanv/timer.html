@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coming Soon</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f8f9fa;
+    }
+
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .content {
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+    }
+
+    .countdown {
+      font-size: 2rem;
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.1);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    .pulse {
+      animation: pulse 1.5s infinite;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="content">
+    <h1>Coming Soon</h1>
+    <p>We are working on something awesome. Stay tuned!</p>
+    <div class="countdown pulse" id="countdown">Launching in: 10</div>
+  </div>
+</div>
+
+<script>
+  // Set the launch date (YYYY-MM-DD format)
+  const launchDate = new Date('2024-04-01').getTime();
+
+  // Update the countdown every second
+  const countdown = setInterval(() => {
+    const now = new Date().getTime();
+    const distance = launchDate - now;
+
+    // Calculating days, hours, minutes, and seconds
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    // Display the countdown
+    document.getElementById('countdown').innerHTML = `Launching in: ${days}d ${hours}h ${minutes}m ${seconds}s`;
+
+    // If the countdown is over, stop it and display a message
+    if (distance < 0) {
+      clearInterval(countdown);
+      document.getElementById('countdown').innerHTML = "Launched!";
+    }
+  }, 1000);
+</script>
+
+</body>
+</html>
